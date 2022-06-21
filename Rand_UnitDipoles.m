@@ -1,5 +1,5 @@
 function dipoles = Rand_UnitDipoles(N)
-%RAND_DIRECTIONS Summary of this function goes here
+%RAND_UNITDIPOLES Gives N randomly generated unit dipole moments
 %   Detailed explanation goes here
 
 V = @(theta) [sin(theta); cos(theta)];

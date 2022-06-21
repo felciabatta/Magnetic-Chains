@@ -6,21 +6,16 @@ function U = SYSTEM_Magnetic_PE(positions,dipoles)
 %   dipoles:    (vector 3xN matrix) a set of N vectors representing the 
 %               dipole moments of N dipoles
 
-Xs = mat2cell(positions, 2,ones(1, size(positions,2)));
-Ms = mat2cell(dipoles,   2,ones(1, size(dipoles,  2)));
+Index_Pairs = nchoosek(1:size(positions,2),2);
+Index_Pairs = reshape(Index_Pairs',1,numel(Index_Pairs));
+X_Pairs     = positions(:,Index_Pairs);
+M_Pairs     = dipoles(  :,Index_Pairs);
 
-X_pairs = nchoosek(Xs,2);
-M_pairs = nchoosek(Ms,2);
-shape   = [2, size(X_pairs, 1)];
-c2m = @(c)  cell2mat(c);
+Xij = @(Xi, Xj)         Xi-Xj;
+Uij = @(Xi, Xj, Mi, Mj) -dot(Mi, Magnetic_Field(Xij(Xi,Xj), Mj) );
 
-
-Xij = @(Xi, Xj)         reshape(c2m(Xi)-c2m(Xj), shape);
-Uij = @(Xi, Xj, Mi, Mj) -dot(                           reshape(c2m(Mi),shape) ,...
-                             Magnetic_Field(Xij(Xi,Xj), reshape(c2m(Mj),shape) )...
-                            );
-
-Us = Uij(X_pairs(:,1), X_pairs(:,2), M_pairs(:,1), M_pairs(:,2));
+Us = Uij(X_Pairs(:,1:2:end), X_Pairs(:,2:2:end),... 
+         M_Pairs(:,1:2:end), M_Pairs(:,2:2:end));
 U = sum(Us);
 
 end
