@@ -1,4 +1,4 @@
-% 2 Dipoles
+% TWO DIPOLE Example
 
 theta = linspace(0,2*pi,1000);
 position = [0 2; 0 0; 0 0];

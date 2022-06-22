@@ -1,8 +1,8 @@
 function U = GENERAL_Magnetic_PE(configuration,Index_Pairs)
-%GENERAL_MAGNETIC_PE Finds MPE for any given subset a magnet configuration
+%GENERAL_MAGNETIC_PE    Finds MPE for any given subset a magnet configuration
 % 
-%   configuration:  (vector 3xNx2 matrix) a set of N pos. and N dir. vectors 
-%                   representing the positions & dipole moments of N dipoles
+%   configuration:      (vector 3xNx2 matrix) a set of N pos. and N dir. vectors 
+%                       representing the positions & dipole moments of N dipoles
 
 X_Pairs     = configuration(:,Index_Pairs,1);
 M_Pairs     = configuration(:,Index_Pairs,2);
