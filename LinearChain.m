@@ -42,7 +42,7 @@ ax.XLim=[0,2*pi];
 %% Every Other Rotating
 
 N = 10;
-points = 1000
+points = 1000;
 theta = reshape(linspace(-pi/2,3*pi/2,points), 1, 1, points);
 
 positions = [ones(1,N,points); zeros(2,N,points)];
