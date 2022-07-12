@@ -1,11 +1,14 @@
 % TWO DIPOLE Example
+points = 1000;
 
-theta = linspace(0,2*pi,1000);
-position = [0 2; 0 0; 0 0];
-dipole = @(t) [1 sin(t); 0 cos(t); 0 0];
+theta = reshape(linspace(0,2*pi,points),1,1,points);
 
-for i = 1:length(theta)
-    U(i) = SYSTEM_Magnetic_PE(position,dipole(theta(i)));
-end
+positions = [ones(1,2,points); zeros(2,2,points)];
+positions = positions.*(0:1);
 
-plot(theta,U)
+dipoles = @(t) [ones(1,1,points) sin(t); zeros(1,1,points) cos(t); zeros(1,2,points)];
+M = dipoles(theta);
+
+U = SYSTEM_Magnetic_PE(positions,M);
+
+plot(reshape(theta,1,points),reshape(U,1,points))

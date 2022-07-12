@@ -1,6 +1,6 @@
 function B = Magnetic_Field(position,dipole)
 %MAGNETIC_FIELD Calculates the magnitude and direction of the MF induced by
-%               the dipole, at a given position
+%               the dipole (at the origin), at a given position
 % 
 %   position:   (vec/vec matrix)    a coordiante, X within the field
 %   dipole:     (vec/vec matrix)    the dipole moment, M of the magnet
