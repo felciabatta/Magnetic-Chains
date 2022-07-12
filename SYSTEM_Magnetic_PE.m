@@ -5,35 +5,17 @@ function U = SYSTEM_Magnetic_PE(positions,dipoles)
 %               positions of N dipoles
 %   dipoles:    (vector 3xN matrix) a set of N vectors representing the 
 %               dipole moments of N dipoles
+X = positions; M = dipoles;
 
-% Indexes for all possible pairs, I = [ [1 2] [1 3] [2 3] etc... ]
-Index_Pairs = nchoosek(1:size(positions,2),2);
-Index_Pairs = reshape(Index_Pairs',1,numel(Index_Pairs))
-    % MAY BE QUICKER TO JUST CALCULATE EVERYTHING AND 1/2 IT
-    % use x'-x to find difference in x positions and y'-y to find y differences
-    % much more efficient vectorised 
+% PERMUTE swaps dimensions of an N-D matrix
+Xij = permute(X,[4 2 1 3])-permute(X,[2 4 1 3]);
+Xij = permute(Xij,[3 2 1 4]); % 3xNxNxP matrix
 
-% All possible pairs, as determined by Index_Pairs
-X_Pairs     = positions(:,Index_Pairs,:);
-M_Pairs     =   dipoles(:,Index_Pairs,:);
+M = permute(M,[1 2 4 3]); % swap 3rd & 4th DIM, to make 2xNx1xP
+M = ones(1,1,size(M,2)).*M; % copy entries of M to make 2xNxNxP matrix
 
-Xij = @(Xi, Xj)         Xi-Xj;
-    % Xi/j = 3x(NC2)xQ matrix, where each column is a pos vector
-    
-Uij = @(Xi, Xj, Mi, Mj) -dot(Mi, Magnetic_Field(Xij(Xi,Xj), Mj) );
-    % The inputs of this function are a lists containing every i/j position
-    % and dipole pair we wish to compute, in respective order
-    % ...This means the inputs have to be carefully prepared in the correct order,
-    % without repeats.
-    % ...Instead we could prepare the inputs using vectorised arithmetic, 
-    % which is much more efficient, but has duplicate calculations
-    % so we just /2 at end
-    % ... Also note that to do things vectorised, it is much easier to separate
-    % x and y components.
-
-Us = Uij(X_Pairs(:,1:2:end,:), X_Pairs(:,2:2:end,:),... 
-         M_Pairs(:,1:2:end,:), M_Pairs(:,2:2:end,:));
-     
-U = sum(Us,2);
+Uij = @(Xij, Mi, Mj) -dot(Mi, Magnetic_Field(Xij, Mj) );
+Us = Uij(Xij, permute(M,[1 3 2 4]), M);
+U = 0.5*sum(Us,[2 3],'omitnan');
 
 end
