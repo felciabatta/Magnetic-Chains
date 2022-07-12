@@ -14,6 +14,7 @@ x(1,2)=1;%(0,0,0) and (1,0,0) this time
 
 tauspan=[0 100];
 r0=start';
+% torque_alpha = @(tau,r) torque(tau,pol2cart(r),x) % change torque input to cart first, so torque
 [tau,r]=ode45(@(tau,r) torque(tau,r,x),tauspan,r0);
 
 plot(tau,r(:,1),tau,r(:,2))
