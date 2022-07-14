@@ -14,8 +14,8 @@ X(1,2)  = 1; % (0,0,0) and (1,0,0) this time
 
 tauspan = [0 100];
 r0      = start';
-% torque_alpha = @(tau,r) torque(X, pol2cart(r)) % change torque input to cart first, so torque
-[tau,r] = ode45(@(tau,r) torque(X,r),tauspan,r0);
+torque_alpha = @(tau,r) torque(X, hat(r)) % makes torque a fnc of angle
+[tau,r] = ode45(torque_alpha,tauspan,r0);
 
 plot(tau,r(:,1),tau,r(:,2))
 ax = gca;
