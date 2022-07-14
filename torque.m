@@ -19,7 +19,7 @@ Xij = @(Xi, Xj) Xi-Xj;
 T   = zeros(3,n);
 
 X   = positions;
-% M   = hat(dipoles);
+M   = hat(dipoles);
 
 for i = 1:n
     % for given i, find all torques on Mi due to Mjs
