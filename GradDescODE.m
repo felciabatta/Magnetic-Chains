@@ -10,7 +10,7 @@
 start   = [pi; (3/2)*pi]; % starting moments, column vector length N
 dof     = size(start,1);
 X       = zeros(3,dof); % fix magnet positions: 3xN matrix
-X(1,2)  = 1; % (0,0,0) and (1,0,0) this time
+X(1,2)  = 10^-2; % (0,0,0) and (1,0,0) this time
 
 tauspan = [0 100];
 r0      = start';

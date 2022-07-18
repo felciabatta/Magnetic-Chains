@@ -8,9 +8,9 @@ function B = Magnetic_Field(position,dipole)
 X = position;
 M = dipole;
 
-mu0 = 1;
-K = mu0/(4*pi);
-X_hat = X./vecnorm(X);
+mu0 = 4*pi*10^-7;       % permeability of free space
+K = mu0/(4*pi);         % magnetic field constant
+X_hat = X./vecnorm(X);  % unit position vectors
 
 B = K * (3*dot(M,X_hat).*X_hat - M) ./ (vecnorm(X).^3);
 end
