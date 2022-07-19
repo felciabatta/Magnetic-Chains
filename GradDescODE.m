@@ -19,7 +19,8 @@ X(1,:)=[-1 0 1]*10^-2; %test 2
 tauspan = [0 100]; % default value
 %tauspan = [0 250]; % testing
 r0      = start';
-torque_alpha = @(tau,r) torque(X, hat(r)); % makes torque a fnc of angle
+torque_alpha = @(tau,r) ([0 0 1]*torque(X, hat(r)))'; % make torque a fnc of angle
+                                                      % [0 0 1] gets k components
 [tau,r] = ode23s(torque_alpha,tauspan,r0);
 
 %% plot 2 magnets

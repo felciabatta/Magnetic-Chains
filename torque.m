@@ -40,7 +40,7 @@ Ts  = Tij(Xij, permute(M,[1 3 2 4]), M);
 T   = permute(sum(Ts,2,'omitnan'),[1 3 2 4]);
 
 % extract k components only (assumes 2D rotation)
-T(1:2,:) = []; % yes, this is a bodge
-T = T';
+% T(1:2,:) = []; % yes, this is a bodge
+% T = T';
 
 end
