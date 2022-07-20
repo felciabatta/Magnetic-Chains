@@ -3,7 +3,7 @@ function animation = MagAnimate(positions,dipoles)
 %           positions and dipole moments vary over time
 %   Detailed explanation goes here
 
-% NOTE - Currently only for 2D plots
+% NOTE - Currently only for 2D plots (automatic, input is 3D)
 X = positions; M = dipoles; 
 
 M_phi = cart2pol(M(1,:,:),M(2,:,:));

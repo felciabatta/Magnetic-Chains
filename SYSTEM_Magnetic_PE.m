@@ -3,7 +3,7 @@ function U = SYSTEM_Magnetic_PE(positions,dipoles)
 % 
 %   positions:  (vector 3xN matrix) a set of N coordinates representing the 
 %               positions of N dipoles
-%   dipoles:    (vector 3xN matrix) a set of N vectors representing the 
+%     dipoles:  (vector 3xN matrix) a set of N vectors representing the 
 %               dipole moments of N dipoles
 [Xij,M] = Xij_M_ComputationMatrix(positions,dipoles) % prepare Xij and M matrices
 

@@ -20,8 +20,8 @@ K = 3*mu0/(4*pi);           % magnetic field constant
 X_hat = Xij./vecnorm(Xij);  % unit position vectors
 
 Fij = @(Mi, Mj) K * ( dot(Mi,X_hat).*Mj + dot(Mj,X_hat).*Mi + (dot(Mi,Mj) - 5*dot(Mi,X_hat).*dot(Mj,X_hat)).*X_hat ) ./ (vecnorm(Xij).^4);
-k = -1;
-Fcontact = k*(vecnorm(Xij)-radius).*(vecnorm(Xij)<=radius);
+k = -10^8;
+Fcontact = k.*(vecnorm(Xij)-radius).*(vecnorm(Xij)<=radius).*X_hat;
 Fs = Fij(permute(M,[1 3 2 4]),M)+Fcontact;
 F = permute(sum(Fs,2,'omitnan'),[1 3 2 4]);
 end

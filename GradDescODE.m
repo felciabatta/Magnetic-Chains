@@ -8,7 +8,7 @@
 
 % start = [pi; (3/2)*pi];     % test 1
 % start = pi*rand(3,1);       % random start
-start = [pi; pi; (3/2)*pi]; % test 2
+start = [pi; pi; -(1/2)*pi]; % test 2
 
 dof     = size(start,1);
 X       = zeros(3,dof); % fix magnet positions: 3xN matrix
