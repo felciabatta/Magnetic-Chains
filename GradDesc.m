@@ -1,4 +1,4 @@
-function [tau,x,y,z,th] = GradDesc(init_positions,init_dipoles)
+function [tau,x,y,z,th] = GradDesc(init_positions,init_dipoles,tau_end)
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -7,7 +7,7 @@ X0 = init_positions; M0 = init_dipoles;
 V0 = ColumnIn(X0,M0);
 MF = MinFunc([],V0);
 
-tauspan = [0 3000]; % MAKE ARGUMENT?
+tauspan = [0 tau_end];
 [tau,V] = ode23s(@MinFunc,tauspan,V0); %
 
 V = permute(V,[2 3 1]);
